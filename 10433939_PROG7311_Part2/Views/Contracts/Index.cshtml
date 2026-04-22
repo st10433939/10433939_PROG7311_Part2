@@ -1,7 +1,7 @@
 ﻿@model List<_10433939_PROG7311_Part2.Models.Contract>
 
 ﻿@{
-	ViewBag.Title = "My Contracts";
+	ViewBag.Title = "Contracts";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <body class="text-bg-secondary">
@@ -44,8 +44,8 @@
 					{
 						<tr>
 							<td>@contract.Clients.name</td>
-							<td>@contract.startDate</td>
-							<td>@contract.endDate</td>
+							<td>@contract.startDate.ToString("MM-dd-yyyy")</td>
+							<td>@contract.endDate.ToString("MM-dd-yyyy")</td>
 							<td>@contract.serviceLevel</td>
 							<td>
 								@if (contract.status == _10433939_PROG7311_Part2.Models.ContractStatus.Draft)
@@ -64,6 +64,9 @@
 								{
 									<span class="badge bg-success text-light">Verified</span>
 								}
+							</td>
+							<td>
+								<a href="/Contracts/Details/@contract.contractId" class="btn btn-sm btn-outline-primary">View Details</a>
 							</td>
 						</tr>
 					}

@@ -101,7 +101,7 @@ namespace _10433939_PROG7311_Part2.Controllers
             }
         }
 
-        /*public IActionResult Details(int id)
+        public IActionResult Details(int id)
         {
             try
             {
@@ -118,17 +118,20 @@ namespace _10433939_PROG7311_Part2.Controllers
                 TempData["Error"] = "Error loading contract.";
                 return RedirectToAction(nameof(Index));
             }
-        }*/
+        }
 
         public async Task<IActionResult> DownloadDocument(int contractId, int docId)
         {
             try
             {
                 var contract = ContractData.GetContractById(contractId);
-                if (contract == null) { return NotFound("contract not found."); }
+                if (contract == null) { return NotFound("Contract not found."); }
 
                 var document = contract.Documents.FirstOrDefault(doc => doc.Id == docId);
                 if (document == null) { return NotFound("Document not found."); }
+
+                var encryptedFilePath = Path.Combine(_environment.WebRootPath, document.FilePath.TrimStart('/'));
+                if (!System.IO.File.Exists(encryptedFilePath)) return NotFound("File not found;");
 
                 var contentType = Path.GetExtension(document.FileName).ToLower()
                     switch
