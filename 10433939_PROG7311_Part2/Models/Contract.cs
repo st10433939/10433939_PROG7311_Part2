@@ -12,6 +12,7 @@ namespace _10433939_PROG7311_Part2.Models
         public string serviceLevel { get; set; }
         public List<UploadedDocument> Documents { get; set; }
         public Client? Clients { get; set; }
+        public ServiceRequest? Requests { get; set; }
         public List<ContractReview> Reviews { get; set; } = new List<ContractReview>();
     }
 }

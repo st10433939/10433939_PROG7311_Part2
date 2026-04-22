@@ -20,6 +20,10 @@
 							<input asp-for="Clients.name" type="text" class="form-control" placeholder="Enter Client Name" />
 						</div>
 						<div class="mb-3">
+							<label asp-for="Clients.region" class="form-label">Client region</label>
+							<input asp-for="Clients.region" type="text" class="form-control" placeholder="Enter Client region" />
+						</div>
+						<div class="mb-3">
 							<label asp-for="startDate" class="form-label">Start Date</label>
 							<input asp-for="startDate" type="date" class="form-control" placeholder="Enter start date" />
 						</div>
@@ -30,6 +34,14 @@
 						<div class="mb-3">
 							<label asp-for="serviceLevel" class="form-label">Service Level</label>
 							<input asp-for="serviceLevel" type="text" class="form-control" placeholder="Enter Service Level" />
+						</div>
+						<div class="mb-3">
+							<label asp-for="Requests.description" class="form-label">Service Level</label>
+							<input asp-for="Requests.description" type="text" class="form-control" placeholder="Enter request description" />
+						</div>
+						<div class="mb-3">
+							<label asp-for="Requests.cost" class="form-label">Service Level</label>
+							<input asp-for="Requests.cost" type="text" class="form-control" placeholder="Enter request cost" />
 						</div>
 						<div class="mb-3">
 							<label class="form-label">Supporting Documents</label>

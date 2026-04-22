@@ -31,7 +31,6 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Client Name</th>
 						<th>Start Date</th>
 						<th>End Date</th>
 						<th>Service Level</th>
@@ -43,7 +42,6 @@
 					@foreach (var contract in Model)
 					{
 						<tr>
-							<td>@contract.Clients.name</td>
 							<td>@contract.startDate.ToString("MM-dd-yyyy")</td>
 							<td>@contract.endDate.ToString("MM-dd-yyyy")</td>
 							<td>@contract.serviceLevel</td>
