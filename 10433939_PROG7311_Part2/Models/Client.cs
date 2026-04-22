@@ -9,5 +9,7 @@ namespace _10433939_PROG7311_Part2.Models
         public string name { get; set; }
         public string contractDetails { get; set; }
         public string region { get; set; }
+
+        public List<Contract> Contracts { get; set; }
     }
 }

@@ -7,8 +7,4 @@
     <RootNamespace>_10433939_PROG7311_Part2</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Clients\" />
-  </ItemGroup>
-
 </Project>

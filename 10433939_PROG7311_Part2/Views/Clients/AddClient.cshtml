@@ -1,0 +1,35 @@
+﻿@model _10433939_PROG7311_Part2.Models.Client
+
+﻿@{
+	ViewBag.Title = "Add Client";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body class="text-bg-secondary">
+	<div class="row">
+		<div class="col-lg-8 mc-auto">
+			<div class="card">
+				<div class="card-header">
+					<h3>New Client</h3>
+				</div>
+				<div class="card-body">
+					<form asp-action="AddClient" method="post" enctype="multipart/form-data">
+						@Html.AntiForgeryToken()
+						<div class="mb-3">
+							<label asp-for="name" class="form-label">Client Name</label>
+							<input asp-for="name" type="text" class="form-control" placeholder="Enter Client Name" />
+						</div>
+						<div class="mb-3">
+							<label asp-for="region" class="form-label">Region</label>
+							<input asp-for="region" type="text" class="form-control" placeholder="Enter Region" />
+						</div>
+
+						<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+							<a href="/Clients" class="btn btn-danger me-md-2">Cancel</a>
+							<button type="submit" class="btn btn-primary">Add Client</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
