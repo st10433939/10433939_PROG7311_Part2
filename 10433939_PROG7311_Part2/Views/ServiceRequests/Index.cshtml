@@ -1,0 +1,112 @@
+﻿@model List<_10433939_PROG7311_Part2.Models.Contract>
+
+@{
+	ViewBag.Title = "Service Requests";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body class="text-bg-secondary">
+	<nav class="mb-4">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/">Home</a></li>
+			<li class="breadcrumb-item active">Service Requests</li>
+		</ol>
+	</nav>
+	<div class="d-flex justify-content-between align-items-center mb-4">
+		<h2>Service Requests</h2>
+	</div>
+</body>
+<ul class="nav nav-bar mb-4">
+    <li class="nav-item">
+        <a class="nav-link @(ViewBag.Filter == "active" ? "active" : "")" href="/Coordinator?filter=active">
+            Active (@ViewBag.ActiveCount)
+        </a>
+    </li>
+	<li class="nav-item">
+		<a class="nav-link @(ViewBag.Filter == "drafted" ? "active" : "")" href="/ServiceRequests?filter=draft">
+			Drafted (@ViewBag.DraftCount)
+		</a>
+	</li>
+	
+</ul>
+<!--Nav to filter tables-->
+<ul class="nav nav-tabs">
+	<li class="nav-item">
+		<a class="nav-link active" href="#">All Contracts (@Model.Count)</a>
+	</li>
+</ul>
+
+<!--Contracts Table-->
+<div class="card">
+	<div class="card-body">
+		@if (Model.Count < 0)
+		{
+			<div class="text-muted">
+				No contracts to be loaded
+			</div>
+		}
+		else
+		{
+			@foreach (var contracts in Model)
+			{
+				if (contracts.status == _10433939_PROG7311_Part2.Models.ContractStatus.Draft || contracts.status == _10433939_PROG7311_Part2.Models.ContractStatus.Active)
+				{
+				<table class="table">
+				<thead>
+					<tr>
+						<th>Client Name</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Service Level</th>
+						<th>Status</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var contract in Model)
+					{
+						<tr>
+							<td>@contract.Clients.name</td>
+							<td>@contract.startDate.ToString("MM-dd-yyyy")</td>
+							<td>@contract.endDate.ToString("MM-dd-yyyy")</td>
+							<td>@contract.serviceLevel</td>
+							<td>
+								@if (contract.status == _10433939_PROG7311_Part2.Models.ContractStatus.Draft)
+								{
+									<span class="badge bg-warning text-light">Draft</span>
+								}
+								else if (contract.status == _10433939_PROG7311_Part2.Models.ContractStatus.OnHold)
+								{
+									<span class="badge bg-warning text-light">OnHold</span>
+								}
+								else if (contract.status == _10433939_PROG7311_Part2.Models.ContractStatus.Expired)
+								{
+									<span class="badge bg-danger text-light">Expired</span>
+								}
+								else if (contract.status == _10433939_PROG7311_Part2.Models.ContractStatus.Active)
+								{
+									<span class="badge bg-success text-light">Active</span>
+								}
+								else
+								{
+									<span class="badge bg-success text-light">Active</span>
+								}
+							</td>
+							<td>
+								<a href="/Contracts/Details/@contract.contractId" class="btn btn-sm btn-outline-primary">View Details</a>
+								<a href="/Contracts/Review/@contract.contractId" class="btn btn-sm btn-outline-primary">Change Status</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+					</table>
+				}
+				else
+				{
+					<div class="text-muted">
+						No contracts drafted or active
+					</div>
+				}
+			}
+		}
+	</div>
+</div>

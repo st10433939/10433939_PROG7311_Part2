@@ -268,7 +268,7 @@ namespace _10433939_PROG7311_Part2.Controllers
             }
             catch (Exception ex)
             {
-                TempData["Error"] = "Error declining Contract.";
+                TempData["Error"] = "Error terminating Contract.";
                 return RedirectToAction(nameof(Index));
             }
         }
