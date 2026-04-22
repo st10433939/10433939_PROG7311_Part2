@@ -1,0 +1,49 @@
+﻿@model _10433939_PROG7311_Part2.Models.Contract
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+﻿@{
+	ViewBag.Title = "Add Contract";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body class="text-bg-secondary">
+	<div class="row">
+		<div class="col-lg-8 mc-auto">
+			<div class="card">
+				<div class="card-header">
+					<h3>New Contract</h3>
+				</div>
+				<div class="card-body">
+					<form asp-action="Add" method="post" enctype="multipart/form-data">
+						@Html.AntiForgeryToken()
+						<div class="mb-3">
+							<label asp-for="Clients.name" class="form-label">Client Name</label>
+							<input asp-for="Clients.name" type="text" class="form-control" placeholder="Enter Client Name" />
+						</div>
+						<div class="mb-3">
+							<label asp-for="startDate" class="form-label">Start Date</label>
+							<input asp-for="startDate" type="datetime" class="form-control" placeholder="Enter start date" />
+						</div>
+						<div class="mb-3">
+							<label asp-for="endDate" class="form-label">End Date</label>
+							<input asp-for="endDate" type="datetime" class="form-control" placeholder="Enter end date" />
+						</div>
+						<div class="mb-3">
+							<label asp-for="serviceLevel" class="form-label">Service Level</label>
+							<input asp-for="serviceLevel" type="text" class="form-control" placeholder="Enter Service Level" />
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Supporting Documents</label>
+							<input type="file" name="documents" class="form-control" accept=".pdf"></input>
+							<small class="form-text text-muted">Upload contract, table pof contents etc</small>
+						</div>
+
+						<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+							<a href="/Contracts" class="btn btn-danger me-md-2">Cancel</a>
+							<button type="submit" class="btn btn-primary">Add Contract</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
