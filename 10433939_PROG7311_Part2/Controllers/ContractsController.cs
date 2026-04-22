@@ -174,5 +174,103 @@ namespace _10433939_PROG7311_Part2.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
+
+        public IActionResult Review(int id)
+        {
+            try
+            {
+                var contract = ContractData.GetContractById(id);
+                if (contract == null)
+                {
+                    TempData["Error"] = "Contract not found.";
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(contract);
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Error loading Contract.";
+                return RedirectToAction(nameof(Index));
+            }
+        }
+        // POST: /Contracts/Verified - CREATES REVIEW RECORD
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Activate(int id)
+        {
+            try
+            {
+                var success = ContractData.UpdateContractStatus(id, ContractStatus.Active);
+
+                if (success)
+                {
+                    TempData["Success"] = "Contract activated successfully!";
+                }
+                else
+                {
+                    TempData["Error"] = "Contract not found.";
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Error activating Contract.";
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Hold(int id)
+        {
+            try
+            {
+                var success = ContractData.UpdateContractStatus(id, ContractStatus.OnHold);
+
+                if (success)
+                {
+                    TempData["Success"] = "Contract successfully put on hold!";
+                }
+                else
+                {
+                    TempData["Error"] = "Contract not found.";
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Error putting Contract on hold.";
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        // POST: /Contract/Decline - CREATES REVIEW RECORD
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Decline(int id)
+        {
+            try
+            {
+                var success = ContractData.UpdateContractStatus(id, ContractStatus.Expired);
+
+                if (success)
+                {
+                    TempData["Success"] = "Contract expired.";
+                }
+                else
+                {
+                    TempData["Error"] = "Contract not found.";
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Error declining Contract.";
+                return RedirectToAction(nameof(Index));
+            }
+        }
     }
 }

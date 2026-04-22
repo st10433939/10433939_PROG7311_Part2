@@ -52,6 +52,10 @@
 								{
 									<span class="badge bg-warning text-light">Draft</span>
 								}
+								else if (contract.status == _10433939_PROG7311_Part2.Models.ContractStatus.OnHold)
+								{
+									<span class="badge bg-warning text-light">OnHold</span>
+								}
 								else if (contract.status == _10433939_PROG7311_Part2.Models.ContractStatus.Expired)
 								{
 									<span class="badge bg-danger text-light">Expired</span>
@@ -62,11 +66,12 @@
 								}
 								else
 								{
-									<span class="badge bg-success text-light">Verified</span>
+									<span class="badge bg-success text-light">Active</span>
 								}
 							</td>
 							<td>
 								<a href="/Contracts/Details/@contract.contractId" class="btn btn-sm btn-outline-primary">View Details</a>
+								<a href="/Contracts/Review/@contract.contractId" class="btn btn-sm btn-outline-primary">Change Status</a>
 							</td>
 						</tr>
 					}

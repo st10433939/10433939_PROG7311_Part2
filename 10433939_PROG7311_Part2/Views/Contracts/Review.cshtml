@@ -1,0 +1,176 @@
+﻿@model _10433939_PROG7311_Part2.Models.Contract
+
+@{
+    ViewBag.Title = "Review";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body class="text-bg-secondary">
+    <nav class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Contracts">Contracts</a></li>
+            <li class="breadcrumb-item">Review</li>
+        </ol>
+    </nav>
+</body>
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger"> @TempData["Error"]</div>
+}
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header d-flex">
+                <h4>Contract ID: @Model.contractId </h4>
+                <div>
+                    @if (Model.status == _10433939_PROG7311_Part2.Models.ContractStatus.Draft)
+                    {
+                        <span class="badge bg-warning fs-6">Currently drafted</span>
+                    }
+                    else if (Model.status == _10433939_PROG7311_Part2.Models.ContractStatus.OnHold)
+                    {
+                        <span class="badge bg-warning fs-6">Currently on hold</span>
+                    }
+                    else if (Model.status == _10433939_PROG7311_Part2.Models.ContractStatus.Active)
+                    {
+                        <span class="badge bg-success fs-6">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger fs-6">Expired</span>
+                    }
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-sm-3"><strong>Clinet Name</strong></div>
+                    <div class="col-sm-9">@Model.Clients.name</div>
+                </div>
+                <div"row mb-3">
+                    <div class="col-sm-3"><strong>Start Date</strong></div>
+                    <div class="col-sm-9">@Model.startDate.ToString("MM-dd-yyyy")</div>
+                    <div"row mb-3">
+                        <div class="col-sm-3"><strong>End Date</strong></div>
+                        <div class="col-sm-9">@Model.endDate.ToString("MM-dd-yyyy")</div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3"><strong>Service Level</strong></div>
+                            <div class="col-sm-9">@Model.serviceLevel</div>
+                        </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                @if (Model.status == _10433939_PROG7311_Part2.Models.ContractStatus.Draft)
+                {
+                    <hr class="my-4">
+                    <h5>Activate</h5>
+
+                    <form asp-action="Activate" method="post" class="mb-3">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.contractId" />
+
+                        <button type="submit" class="btn btn-success btn-lg">
+                            Activate Contract
+                        </button>
+                    </form>
+
+                    <form asp-action="Decline" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.contractId" />
+
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            Decline Contract
+                        </button>
+                        <a href="/Contracts" class="btn btn-secondary btn-lg">Cancel</a>
+                    </form>
+                }
+                else if (Model.status == _10433939_PROG7311_Part2.Models.ContractStatus.Active)
+                {
+                    <hr class="my-4">
+                    <h5>Hold</h5>
+
+                    <form asp-action="Hold" method="post" class="mb-3">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.contractId" />
+
+                        <button type="submit" class="btn btn-warning btn-lg">
+                            Hold Contract
+                        </button>
+                    </form>
+
+                    <form asp-action="Decline" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.contractId" />
+
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            Expire Contract
+                        </button>
+                        <a href="/Contracts" class="btn btn-secondary btn-lg">Cancel</a>
+                    </form>
+                }
+                else if (Model.status == _10433939_PROG7311_Part2.Models.ContractStatus.OnHold)
+                {
+                    <hr class="my-4">
+                    <h5>Activate</h5>
+
+                    <form asp-action="Activate" method="post" class="mb-3">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.contractId" />
+
+                        <button type="submit" class="btn btn-success btn-lg">
+                            Activate Contract
+                        </button>
+                    </form>
+
+                    <form asp-action="Decline" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.contractId" />
+
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            Decline Contract
+                        </button>
+                        <a href="/Contracts" class="btn btn-secondary btn-lg">Cancel</a>
+                    </form>
+                }
+            </div>
+        </div>
+        <></>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5> Supporting Documents (@Model.Documents.Count)</h5>
+            </div>
+            <div class="card-body">
+                @if (Model.Documents.Count == 0)
+                {
+                    <p class="text-muted">No documents uploaded.</p>
+                }
+                else
+                {
+                    <div class="list-group">
+                        @foreach (var doc in Model.Documents)
+                        {
+                            <div class="list-group-item">
+                                <strong>@doc.FileName</strong>
+                                <br>
+                                <small>@(doc.FileSize / 1024) KB</small>
+                                <br>
+                                <a href="/Contracts/DownloadDocument?contractId=@Model.contractId&docId=@doc.Id"
+                                   class="btn btn-sm btn-primary mt-2">
+                                    Download
+                                </a>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
