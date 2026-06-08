@@ -1,0 +1,6 @@
+services:
+  poe_p3_api:
+    image: ${DOCKER_REGISTRY-}poep3api
+    build:
+      context: .
+      dockerfile: POE_P3_API/Dockerfile
