@@ -4,3 +4,10 @@ services:
     build:
       context: .
       dockerfile: POE_P3_API/Dockerfile
+
+  10433939_prog7311_part2:
+    image: ${DOCKER_REGISTRY-}10433939prog7311part2
+    build:
+      context: .
+      dockerfile: 10433939_PROG7311_Part2/Dockerfile
+
