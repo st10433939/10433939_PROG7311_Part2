@@ -4,7 +4,8 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "poe_p3_api": "StartDebugging"
+        "poe_p3_api": "StartDebugging",
+        "10433939_prog7311_part2": "StartDebugging"
       }
     }
   }

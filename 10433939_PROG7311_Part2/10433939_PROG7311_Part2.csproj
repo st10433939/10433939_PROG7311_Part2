@@ -7,6 +7,7 @@
     <RootNamespace>_10433939_PROG7311_Part2</RootNamespace>
     <UserSecretsId>e8bc78f4-1512-4c74-b03e-c0ae7f8c5e55</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
